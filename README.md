@@ -125,7 +125,6 @@ touch .env.prod
 | `PROXY_NETWORK_NAME` | Proxy network name                                              | `nginxproxynet` | false    |
 | `OC_ADMIN_USERNAME`  | ownCloud admin username                                         | none            | true     |
 | `OC_ADMIN_PASSWORD`  | ownCloud admin password                                         | none            | true     |
-| `PORT`               | Which port is mapped to your host machine                       | `3308`          | false    |
 | `DB_DATABASE`        | Maria DB name                                                   | `owncloudProd`  | false    |
 | `DB_USER`            | Maria user                                                      | `owncloudProd`  | false    |
 | `DB_PASSWORD`        | Maria password                                                  | none            | true     |
