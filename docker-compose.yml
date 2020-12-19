@@ -1,0 +1,61 @@
+version: "3.7"
+services:
+    owncloud:
+        image: owncloud/server:10.6.0
+
+        restart: always
+
+        ports:
+            - 8080
+
+        depends_on:
+            - mariadb
+            - redis
+
+        networks:
+            - default
+
+        environment:
+            OWNCLOUD_DB_TYPE: mysql
+            OWNCLOUD_DB_HOST: mariadb
+            OWNCLOUD_MYSQL_UTF8MB4: 1
+            OWNCLOUD_REDIS_ENABLED: 1
+            OWNCLOUD_REDIS_HOST: redis
+
+        volumes:
+            - owncloudData:/mnt/data
+
+    mariadb:
+        image: mariadb:10.5.8
+
+        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+
+        restart: always
+
+        networks:
+            - default
+
+        environment:
+            MYSQL_RANDOM_ROOT_PASSWORD: 1
+
+        volumes:
+            - owncloudMariadbData:/var/lib/mysql
+
+    redis:
+        image: redis:6.0.9-alpine
+
+        restart: always
+
+        networks:
+            - default
+
+        volumes:
+            - owncloudRedisData:/data
+
+volumes:
+    owncloudData:
+        driver: local
+    owncloudMariadbData:
+        driver: local
+    owncloudRedisData:
+        driver: local

@@ -1,0 +1,35 @@
+version: "3.7"
+services:
+    owncloud:
+        container_name: owncloudProd
+
+        environment:
+            VIRTUAL_HOST: ${HOST:?Missing environment variable see readme}
+            VIRTUAL_PORT: 8080
+            LETSENCRYPT_HOST: ${HOST:?Missing environment variable see readme}
+            OWNCLOUD_DOMAIN: ${HOST:?Missing environment variable see readme}
+            OWNCLOUD_DB_NAME: ${DB_DATABASE-owncloudProd}
+            OWNCLOUD_DB_USERNAME: ${DB_USER-owncloudProd}
+            OWNCLOUD_DB_PASSWORD: ${DB_PASSWORD:?Missing environment variable see readme}
+            OWNCLOUD_ADMIN_USERNAME: ${OC_ADMIN_USERNAME:?Missing environment variable see readme}
+            OWNCLOUD_ADMIN_PASSWORD: ${OC_ADMIN_PASSWORD:?Missing environment variable see readme}
+
+        networks:
+            - default
+            - nginxproxynet
+
+    mariadb:
+        container_name: mariadbProd
+
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE-owncloudProd}
+            MYSQL_USER: ${DB_USER-owncloudProd}
+            MYSQL_PASSWORD: ${DB_PASSWORD:?Missing environment variable see readme}
+
+    redis:
+        container_name: redisProd
+
+networks:
+    nginxproxynet:
+        name: ${PROXY_NETWORK_NAME-nginxproxynet}
+        external: true

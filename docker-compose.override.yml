@@ -1,0 +1,31 @@
+version: "3.7"
+services:
+    owncloud:
+        container_name: owncloudDev
+
+        ports:
+            - ${PORT-3308}:8080
+
+        environment:
+            FORCE_COLOR: 1
+            OWNCLOUD_DOMAIN: https://${DOMAIN-localhost}:${PORT-3308}
+            OWNCLOUD_DB_NAME: ${DB_DATABASE-owncloudDev}
+            OWNCLOUD_DB_USERNAME: ${DB_USER-owncloudDev}
+            OWNCLOUD_DB_PASSWORD: ${DB_PASSWORD-8j38ppKnKNph}
+            OWNCLOUD_ADMIN_USERNAME: ${OC_ADMIN_USERNAME-owncloudDev}
+            OWNCLOUD_ADMIN_PASSWORD: ${OC_ADMIN_PASSWORD-7okaKiH6a9km}
+
+    mariadb:
+        container_name: mariadbDev
+
+        environment:
+            FORCE_COLOR: 1
+            MYSQL_DATABASE: ${DB_DATABASE-owncloudDev}
+            MYSQL_USER: ${DB_USER-owncloudDev}
+            MYSQL_PASSWORD: ${DB_PASSWORD-8j38ppKnKNph}
+
+    redis:
+        container_name: redisDev
+
+        environment:
+            FORCE_COLOR: 1
