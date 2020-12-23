@@ -21,6 +21,13 @@ services:
     mariadb:
         container_name: mariadbProd
 
+        healthcheck:
+             test:
+                [
+                    "CMD-SHELL",
+                    'mysql -h "0.0.0.0" --user=${DB_USER-owncloudProd} --password=${DB_PASSWORD:?Missing environment variable see readme} --execute "SELECT 1;"',
+                ]
+
         environment:
             MYSQL_DATABASE: ${DB_DATABASE-owncloudProd}
             MYSQL_USER: ${DB_USER-owncloudProd}

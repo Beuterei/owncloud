@@ -18,6 +18,13 @@ services:
     mariadb:
         container_name: mariadbDev
 
+        healthcheck:
+            test:
+                [
+                    "CMD-SHELL",
+                    'mysql -h "0.0.0.0" --user=${DB_USER-owncloudDev} --password=${DB_PASSWORD-8j38ppKnKNph} --execute "SELECT 1;"',
+                ]
+
         environment:
             FORCE_COLOR: 1
             MYSQL_DATABASE: ${DB_DATABASE-owncloudDev}
