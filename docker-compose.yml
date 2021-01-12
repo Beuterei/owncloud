@@ -1,7 +1,7 @@
 version: "3.7"
 services:
     owncloud:
-        image: owncloud/server:10.5.0
+        image: owncloud/server:10.6.0
 
         restart: always
 
