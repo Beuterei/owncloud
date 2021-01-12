@@ -26,7 +26,6 @@ services:
         environment:
             OWNCLOUD_DB_TYPE: mysql
             OWNCLOUD_DB_HOST: mariadb
-            OWNCLOUD_MYSQL_UTF8MB4: 1
             OWNCLOUD_REDIS_ENABLED: 1
             OWNCLOUD_REDIS_HOST: redis
 
@@ -36,7 +35,7 @@ services:
     mariadb:
         image: mariadb:10.5.8
 
-        command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        command: --character-set-server=utf8 --collation-server=utf8_general_ci
 
         restart: always
 
